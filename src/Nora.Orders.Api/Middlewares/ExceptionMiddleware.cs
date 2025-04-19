@@ -1,4 +1,4 @@
-﻿using Nora.Orders.Domain.Exceptions;
+﻿using Nora.Core.Domain.Exceptions;
 using System.Net;
 using System.Text.Json;
 
