@@ -1,8 +1,9 @@
-﻿using Nora.Orders.Domain.ValueObjects;
+﻿using Nora.Core.Domain.Entities;
+using Nora.Orders.Domain.ValueObjects;
 
 namespace Nora.Orders.Domain.Entities;
 
-public class Order : BaseEntity<int>
+public class Order : Entity<int>
 {    
     public Customer Customer { get; private set; }
 

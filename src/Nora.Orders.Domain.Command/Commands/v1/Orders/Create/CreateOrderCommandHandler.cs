@@ -1,7 +1,7 @@
 ﻿using MediatR;
-using Nora.Orders.Domain.Contracts.Contexts;
+using Nora.Core.Database.Contracts;
+using Nora.Core.Database.Contracts.Repositories;
 using Nora.Orders.Domain.Contracts.Repositories;
-using Nora.Orders.Domain.Contracts.UnitOfWork;
 using Nora.Orders.Domain.Entities;
 
 namespace Nora.Orders.Domain.Command.Commands.v1.Orders.Create;
