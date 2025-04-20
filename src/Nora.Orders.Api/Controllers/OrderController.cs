@@ -24,6 +24,4 @@ public sealed class OrderController(IMediator mediator) : ControllerBase
 
         return Ok(response);
     }
-
-
 }

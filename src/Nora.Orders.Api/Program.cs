@@ -17,6 +17,7 @@ builder.Services.AddSwaggerGen();
 builder.Services.AddMediatR<CreateOrderCommandHandler, GetOrderByIdQueryHandler>();
 builder.Services.AddEntityFramework<AppDbContext>(builder.Configuration);
 builder.Services.AddRepositories<OrderRepository>();
+builder.Services.AddRefitClients(builder.Configuration);
 
 var app = builder.Build();
 
