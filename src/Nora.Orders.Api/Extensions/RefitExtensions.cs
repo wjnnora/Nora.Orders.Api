@@ -1,4 +1,4 @@
-﻿using Nora.Core.Api.Refit;
+﻿using Nora.Core.Api.Refit.Extensions;
 using Nora.Orders.Domain.Clients.v1.User.User;
 
 namespace Nora.Orders.Api.Extensions;
