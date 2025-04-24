@@ -8,5 +8,8 @@ public sealed class CreateOrderCommandValidator : AbstractValidator<CreateOrderC
     {
         RuleFor(r => r.UserId)
             .GreaterThan(0);
+
+        RuleFor(r => r.ProductIds)
+            .NotEmpty();
     }
 }

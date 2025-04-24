@@ -27,5 +27,7 @@ public sealed class OrderMapping : IEntityTypeConfiguration<Order>
                 .HasColumnName("CustomerName");            
 
         }).Navigation(p => p.Customer).IsRequired();
+
+        builder.HasMany(p => p.OrderItems);
     }
 }
