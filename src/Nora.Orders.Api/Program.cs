@@ -1,3 +1,5 @@
+using FluentValidation;
+using FluentValidation.AspNetCore;
 using Microsoft.EntityFrameworkCore;
 using Nora.Core.Database.Configurations;
 using Nora.Core.Database.Postgres.EntityFramework.Configurations;
@@ -18,6 +20,8 @@ builder.Services.AddMediatR<CreateOrderCommandHandler, GetOrderByIdQueryHandler>
 builder.Services.AddEntityFramework<AppDbContext>(builder.Configuration);
 builder.Services.AddRepositories<OrderRepository>();
 builder.Services.AddRefitClients(builder.Configuration);
+builder.Services.AddValidatorsFromAssemblyContaining<CreateOrderCommandValidator>();
+builder.Services.AddFluentValidationAutoValidation().AddFluentValidationClientsideAdapters();
 
 var app = builder.Build();
 

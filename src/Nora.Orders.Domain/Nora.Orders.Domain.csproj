@@ -5,13 +5,14 @@
     <ImplicitUsings>enable</ImplicitUsings>    
   </PropertyGroup>
 
-  <ItemGroup>
+  <ItemGroup>    
+    <PackageReference Include="FluentValidation.AspNetCore" Version="11.3.0" />    
     <PackageReference Include="MediatR" Version="11.0.0" />
     <PackageReference Include="MediatR.Extensions.Microsoft.DependencyInjection" Version="11.0.0" />
     <PackageReference Include="Nora.Core.Database" Version="1.0.8" />
     <PackageReference Include="Nora.Core.Database.Postgres" Version="1.0.8" />
     <PackageReference Include="Nora.Core.Domain" Version="1.0.4" />
-    <PackageReference Include="Nora.Core.Api" Version="1.0.6" />
+    <PackageReference Include="Nora.Core.Api" Version="1.0.7" />
   </ItemGroup>
 
 </Project>
