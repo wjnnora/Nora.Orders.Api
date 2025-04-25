@@ -36,13 +36,24 @@ public sealed class CreateOrderCommandHandler(
 
     private async Task ValidateAsync(CreateOrderCommand request)
     {
-        _ = await userClient.GetByIdAsync(request.UserId)
-            ?? throw new DomainException($"User with id {request.UserId} not found.");
+        await TryGetUserIdAsync(request.UserId);
 
         await request.ProductIds.ForEachAsync(async (productId, ct) =>
         {
             await TryGetProductByIdAsync(productId);
         });        
+    }
+
+    private async Task<UserResponse> TryGetUserIdAsync(int userId)
+    {
+        try
+        {
+            return await userClient.GetByIdAsync(userId);
+        }
+        catch
+        {
+            throw new DomainException($"User with id {userId} not found.");
+        }
     }
 
     private async Task<ProductResponse> TryGetProductByIdAsync(int productId)
