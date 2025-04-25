@@ -92,13 +92,11 @@ namespace Nora.Orders.Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Nora.Orders.Domain.Entities.OrderItem", b =>
                 {
-                    b.HasOne("Nora.Orders.Domain.Entities.Order", "Order")
+                    b.HasOne("Nora.Orders.Domain.Entities.Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Nora.Orders.Domain.Entities.Order", b =>

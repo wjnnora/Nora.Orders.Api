@@ -12,7 +12,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Nora.Orders.Infrastructure.Database.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20250425004032_Initial")]
+    [Migration("20250425004813_Initial")]
     partial class Initial
     {
         /// <inheritdoc />
@@ -95,13 +95,11 @@ namespace Nora.Orders.Infrastructure.Database.Migrations
 
             modelBuilder.Entity("Nora.Orders.Domain.Entities.OrderItem", b =>
                 {
-                    b.HasOne("Nora.Orders.Domain.Entities.Order", "Order")
+                    b.HasOne("Nora.Orders.Domain.Entities.Order", null)
                         .WithMany("OrderItems")
                         .HasForeignKey("OrderId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("Order");
                 });
 
             modelBuilder.Entity("Nora.Orders.Domain.Entities.Order", b =>
