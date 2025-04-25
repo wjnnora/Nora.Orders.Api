@@ -12,10 +12,11 @@ using Nora.Orders.Domain.Command.Mappers;
 using Nora.Orders.Domain.Query.Queries.v1.Orders.GetById;
 using Nora.Orders.Infrastructure.Database.EntityFramework;
 using Nora.Orders.Infrastructure.Database.EntityFramework.Repositories;
+using System.Text.Json.Serialization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddControllers();
+builder.Services.AddControllers().AddJsonOptions(options => { options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.Preserve; });
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
