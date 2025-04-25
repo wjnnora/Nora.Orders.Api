@@ -20,7 +20,7 @@ public class ExceptionMiddleware(RequestDelegate next)
         catch (Exception ex)
         {
             var message = JsonSerializer.Serialize(new[] { ex.Message });
-            await HandleRequestExceptionAsync(httpContext, message, HttpStatusCode.BadRequest);
+            await HandleRequestExceptionAsync(httpContext, message, HttpStatusCode.InternalServerError);
         }
     }
 

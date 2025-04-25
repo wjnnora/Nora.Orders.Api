@@ -7,6 +7,7 @@ using Nora.Orders.Domain.Clients.v1.Product.Product;
 using Nora.Orders.Domain.Clients.v1.User.User;
 using Nora.Orders.Domain.Contracts.Repositories;
 using Nora.Orders.Domain.Entities;
+using Nora.Orders.Domain.Extensions;
 using Nora.Orders.Domain.ValueObjects;
 
 namespace Nora.Orders.Domain.Command.Commands.v1.Orders.Create;
@@ -35,23 +36,24 @@ public sealed class CreateOrderCommandHandler(
 
     private async Task ValidateAsync(CreateOrderCommand request)
     {
-        var userValidationTask = userClient.GetByIdAsync(request.UserId)
-            .ContinueWith(task =>
-            {
-                if (task.Result == null)
-                    throw new DomainException($"User with id {request.UserId} does not exist");
-            });
+        _ = await userClient.GetByIdAsync(request.UserId)
+            ?? throw new DomainException($"User with id {request.UserId} not found.");
 
-        var productValidationTasks = request.ProductIds.Select(productId =>
-            productClient.GetByIdAsync(productId).ContinueWith(task =>
-            {
-                if (task.Result == null)
-                    throw new DomainException($"Product with id {productId} does not exist");
-            }));
+        await request.ProductIds.ForEachAsync(async (productId, ct) =>
+        {
+            await TryGetProductByIdAsync(productId);
+        });        
+    }
 
-        var allTasks = new List<Task> { userValidationTask };
-        allTasks.AddRange(productValidationTasks);
-
-        await Task.WhenAll(allTasks);
+    private async Task<ProductResponse> TryGetProductByIdAsync(int productId)
+    {
+        try
+        {
+            return await productClient.GetByIdAsync(productId);
+        }
+        catch
+        {
+            throw new DomainException($"Product with id {productId} not found.");
+        }
     }
 }
